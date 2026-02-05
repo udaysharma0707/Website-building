@@ -21,6 +21,10 @@
             padding: 0;
         }
 
+        html {
+    overflow-x: hidden;
+}
+
         :root {
             --primary: #25D366;
             --primary-dark: #128C7E;
@@ -915,7 +919,7 @@ body {
         .team-scene {
             padding: 100px 0;
             background: linear-gradient(135deg, rgba(15, 35, 24, 0.85) 0%, rgba(18, 140, 126, 0.8) 100%),
-                url('warehouse_background.webp') center/cover no-repeat fixed;
+        url('warehouse_background.webp') center/cover no-repeat scroll;
             color: white;
             text-align: center;
             position: relative;
@@ -1511,17 +1515,20 @@ body {
             }
         }
 
-        @media (max-width: 768px) {
+      @media (max-width: 768px) {
+    /* ADD THESE LINES AT THE START */
     .hero::after,
     .hero-decoration,
     .app-download::after,
-    .app-screenshots::before {
-        display: none;
+    .app-screenshots::before,
+    .team-scene::before {
+        display: none !important;
     }
     
     .container {
         padding: 0 16px;
         max-width: 100%;
+        overflow-x: hidden;
     }
 
             .nav-links {
@@ -2627,5 +2634,6 @@ body {
 </body>
 
 </html>
+
 
 

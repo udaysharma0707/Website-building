@@ -434,7 +434,7 @@ body {
             z-index: 0;
         }
 
-
+       
         /* Decorative gradient orb */
 .hero::after {
     content: '';
@@ -474,24 +474,10 @@ body {
             margin-bottom: 20px;
         }
 
-        .hero-content h1.hero-headline-animate {
-            opacity: 0;
-            transform: translateY(24px);
-            letter-spacing: 0.5px;
-            animation: heroHeadlineReveal .9s cubic-bezier(0.22, 1, 0.36, 1) .1s forwards;
-        }
-
         .hero-content h1 span {
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-
-        .hero-content h1.hero-headline-animate span {
-            display: inline-block;
-            opacity: 0;
-            transform: translateY(18px);
-            animation: heroHeadlineSpanReveal .8s ease .45s forwards;
         }
 
         .hero-content>p {
@@ -1538,7 +1524,7 @@ body {
     .team-scene::before {
         display: none !important;
     }
-
+    
     .container {
         padding: 0 16px;
         max-width: 100%;
@@ -1903,8 +1889,6 @@ body {
 .splash-text h2{color:#fff;font-size:clamp(1.5rem,4vw,2rem);margin-bottom:8px}
 .splash-text p{color:rgba(255,255,255,.8);font-size:.95rem;opacity:0;animation:fadeIn .5s ease 2.5s forwards}
 @keyframes fadeIn{to{opacity:1}}
-@keyframes heroHeadlineReveal{0%{opacity:0;transform:translateY(24px);filter:blur(2px)}100%{opacity:1;transform:translateY(0);filter:blur(0)}}
-@keyframes heroHeadlineSpanReveal{0%{opacity:0;transform:translateY(18px)}100%{opacity:1;transform:translateY(0)}}
 .loading-dots{display:flex;gap:8px;margin-top:30px;opacity:0;animation:fadeIn .5s ease 2.8s forwards}
 .loading-dots span{width:10px;height:10px;background:var(--primary);border-radius:50%;animation:dotPulse 1.4s infinite}
 .loading-dots span:nth-child(2){animation-delay:.2s}
@@ -1948,7 +1932,7 @@ body {
     </div>
     <div class="loading-dots"><span></span><span></span><span></span></div>
 </div>
-
+    
     <!-- Header -->
     <header id="header">
         <div class="container">
@@ -1970,7 +1954,7 @@ body {
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <h1 id="heroHeadline">Turn a QR into a shop — <span>manage inventory, invoices & orders</span> in minutes</h1>
+                    <h1>Turn a QR into a shop — <span>manage inventory, invoices & orders</span> in minutes</h1>
                     <p>Create a unique QR, manage your stock, generate invoices with AI help, and let customers buy by
                         scanning.</p>
                     <ul class="hero-bullets">
@@ -2450,7 +2434,7 @@ body {
     const qrGrid = document.getElementById('qrGrid');
     const scanText = document.getElementById('scanText');
     const splash = document.getElementById('splashScreen');
-
+    
     // QR pattern (1=filled, 0=empty, 2=corner)
     const pattern = [
         [2,2,2,1,0,1,2,2,2],
@@ -2463,7 +2447,7 @@ body {
         [2,0,2,0,1,0,2,0,2],
         [2,2,2,1,0,1,2,2,2]
     ];
-
+    
     // Generate QR cells
     pattern.flat().forEach((val, i) => {
         const cell = document.createElement('div');
@@ -2471,7 +2455,7 @@ body {
         cell.style.animationDelay = `${0.4 + (i * 0.015)}s`;
         qrGrid.appendChild(cell);
     });
-
+    
     // Animate "Scan and Order" text
     const text = "Scan and Order";
     text.split('').forEach((char, i) => {
@@ -2480,18 +2464,17 @@ body {
         span.style.animationDelay = `${1.8 + (i * 0.05)}s`;
         scanText.appendChild(span);
     });
-
+    
     // Hide splash after 4 seconds
     setTimeout(() => splash.classList.add('hide'), 4000);
     setTimeout(() => splash.style.display = 'none', 4800);
 })();
 
-
+        
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const header = document.getElementById('header');
         const phoneMockup = document.getElementById('phoneMockup');
         const heroContent = document.querySelector('.hero-content');
-        const heroHeadline = document.getElementById('heroHeadline');
 
         // Header scroll effect with smooth transition
         let lastScrollY = 0;
@@ -2511,13 +2494,6 @@ body {
 
         // Hero entrance animations
         window.addEventListener('load', () => {
-            const isFirstOpen = !sessionStorage.getItem('heroHeadlineAnimated');
-
-            if (isFirstOpen && !prefersReducedMotion && heroHeadline) {
-                heroHeadline.classList.add('hero-headline-animate');
-                sessionStorage.setItem('heroHeadlineAnimated', '1');
-            }
-
             setTimeout(() => heroContent?.classList.add('show'), 100);
             setTimeout(() => phoneMockup?.classList.add('hero-animate'), 300);
 
@@ -2658,6 +2634,7 @@ body {
 </body>
 
 </html>
+
 
 
 

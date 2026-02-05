@@ -47,13 +47,18 @@
             scroll-behavior: smooth;
         }
 
-        body {
-            font-family: 'Inter', -apple-system, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+       html, body {
+    overflow-x: hidden;
+    width: 100%;
+    max-width: 100vw;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
 
         .container {
             max-width: 1200px;
@@ -425,27 +430,27 @@
             z-index: 0;
         }
 
+       
         /* Decorative gradient orb */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: -40%;
-            right: -20%;
-            width: 700px;
-            height: 700px;
+.hero::after {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: min(700px, 100vw);
+    height: min(700px, 100vw);
             border-radius: 50%;
             background: radial-gradient(circle, rgba(37, 211, 102, 0.2) 0%, rgba(18, 140, 126, 0.1) 40%, transparent 70%);
             animation: floatSlow 8s ease-in-out infinite;
             z-index: 0;
         }
 
-        /* Additional decorative element */
-        .hero-decoration {
-            position: absolute;
-            bottom: -20%;
-            left: -15%;
-            width: 500px;
-            height: 500px;
+       .hero-decoration {
+    position: absolute;
+    bottom: -20%;
+    left: -15%;
+    width: min(500px, 80vw);
+    height: min(500px, 80vw);
             border-radius: 50%;
             background: radial-gradient(circle, rgba(220, 248, 198, 0.4) 0%, transparent 60%);
             animation: float 10s ease-in-out infinite;
@@ -597,14 +602,14 @@
             opacity: 0.05;
         }
 
-        .app-download::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
+       .app-download::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(800px, 100vw);
+    height: min(800px, 100vw);
             border-radius: 50%;
             background: radial-gradient(circle, rgba(37, 211, 102, 0.15) 0%, transparent 60%);
         }
@@ -784,14 +789,14 @@
             position: relative;
         }
 
-        .app-screenshots::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+       .app-screenshots::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(600px, 100vw);
+    height: min(600px, 100vw);
             border-radius: 50%;
             background: radial-gradient(circle, rgba(37, 211, 102, 0.1) 0%, transparent 60%);
         }
@@ -1507,9 +1512,17 @@
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
+    .hero::after,
+    .hero-decoration,
+    .app-download::after,
+    .app-screenshots::before {
+        display: none;
+    }
+    
+    .container {
+        padding: 0 16px;
+        max-width: 100%;
+    }
 
             .nav-links {
                 position: fixed;
@@ -1877,7 +1890,16 @@
 .splash-particles{position:absolute;width:100%;height:100%;overflow:hidden;pointer-events:none}
 .particle{position:absolute;width:6px;height:6px;background:var(--primary);border-radius:50%;opacity:.3;animation:floatParticle 4s infinite}
 @keyframes floatParticle{0%,100%{transform:translateY(0);opacity:.3}50%{transform:translateY(-30px);opacity:.6}}
-@media(max-width:768px){.qr-container{width:160px;height:160px}.qr-grid{width:130px;height:130px;gap:2px;padding:8px}.qr-center-logo span{font-size:.8rem}.splash-text h2{font-size:1.2rem}}
+@media(max-width:768px){
+    .splash-screen{padding:20px}
+    .qr-container{width:160px;height:160px;margin:0 auto}
+    .qr-grid{width:130px;height:130px;gap:2px;padding:8px}
+    .qr-center-logo{padding:6px 10px}
+    .qr-center-logo span{font-size:.8rem}
+    .splash-text{padding:0 20px}
+    .splash-text h2{font-size:1.2rem}
+    .splash-text p{font-size:.85rem}
+}
     </style>
 </head>
 
@@ -2605,4 +2627,5 @@
 </body>
 
 </html>
+
 

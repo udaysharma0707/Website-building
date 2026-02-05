@@ -1,31 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InvenQR — QR storefronts, inventory & invoicing for small shops</title>
-    <meta name="description" content="InvenQR lets shop owners manage inventory, generate barcodes, create AI-assisted invoices and convert any printed QR into a working online storefront — customers scan and buy. Book a demo.">
-    <meta name="keywords" content="QR storefront, inventory management, invoice maker, small business, kirana, bakery, salon, billing software">
-    <meta property="og:title" content="InvenQR — QR storefronts for small shops">
-    <meta property="og:description" content="Manage inventory, generate barcodes, create invoices and let customers buy by scanning a QR code.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://invenqr.in">
+    <meta name="description"
+        content="InvenQR lets shop owners manage inventory, generate barcodes, create AI-assisted invoices and convert any printed QR into a working online storefront — customers scan and buy. Book a demo.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "InvenQR",
-        "url": "https://invenqr.in",
-        "description": "QR storefronts, inventory management, barcode generator and AI-assisted invoice maker for small shops.",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web"
-    }
-    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap"
+        rel="stylesheet">
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         :root {
             --primary: #0B84FF;
             --primary-dark: #0066CC;
@@ -39,262 +34,1470 @@
             --shadow-lg: 0 20px 60px rgba(11, 132, 255, 0.2);
             --radius: 16px;
             --radius-sm: 10px;
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
-        html { scroll-behavior: smooth; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; line-height: 1.2; }
-        h1 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; }
-        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700; text-align: center; margin-bottom: 16px; }
-        .section-subtitle { text-align: center; color: var(--text-light); max-width: 600px; margin: 0 auto 48px; font-size: 1.1rem; }
-        
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: clamp(1.75rem, 5vw, 3.5rem);
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto 32px;
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+        }
+
+        /* Scroll Reveal */
+        .reveal,
+        .feature-card,
+        .step,
+        .benefit-card,
+        .pricing-card,
+        .testimonial-card,
+        .trust-item {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+
+        .reveal.show,
+        .feature-card.show,
+        .step.show,
+        .benefit-card.show,
+        .pricing-card.show,
+        .testimonial-card.show,
+        .trust-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title-group {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+        }
+
+        .section-title-group.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* Header */
         header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(247, 251, 255, 0.9); backdrop-filter: blur(20px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(247, 251, 255, 0.95);
+            backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(11, 132, 255, 0.1);
-            transition: all 0.3s ease;
         }
-        header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; }
-        .logo { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .nav-links { display: flex; gap: 32px; list-style: none; }
-        .nav-links a { text-decoration: none; color: var(--text); font-weight: 500; font-size: 0.95rem; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
-        .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; }
-        .nav-toggle span { width: 24px; height: 2px; background: var(--text); transition: 0.3s; }
-        
+
+        header.scrolled {
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 8px;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            transition: 0.3s;
+        }
+
         /* Buttons */
         .btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 14px 28px; border-radius: 50px; font-weight: 600; font-size: 1rem;
-            text-decoration: none; cursor: pointer; border: none; transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s var(--ease-out-expo);
         }
+
         .btn-primary {
-            background: var(--gradient); color: white;
+            background: var(--gradient);
+            color: white;
             box-shadow: 0 4px 20px rgba(11, 132, 255, 0.4);
         }
-        .btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 8px 30px rgba(11, 132, 255, 0.5); }
-        .btn-secondary { background: white; color: var(--primary); border: 2px solid var(--primary); }
-        .btn-secondary:hover { background: var(--primary); color: white; }
-        
+
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 30px rgba(11, 132, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-dark {
+            background: #1a1a2e;
+            color: white;
+        }
+
         /* Hero */
         .hero {
-            min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 60px;
             background: linear-gradient(180deg, #F7FBFF 0%, #EBF5FF 100%);
-            position: relative; overflow: hidden;
+            position: relative;
+            overflow: hidden;
         }
+
         .hero::before {
-            content: ''; position: absolute; top: -50%; right: -20%;
-            width: 800px; height: 800px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(110, 193, 255, 0.3) 0%, transparent 70%);
-            animation: float 8s ease-in-out infinite;
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(110, 193, 255, 0.25) 0%, transparent 70%);
         }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
-        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
-        .hero-content h1 { margin-bottom: 24px; }
-        .hero-content h1 span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .hero-content p { font-size: 1.2rem; color: var(--text-light); margin-bottom: 32px; max-width: 500px; }
-        .hero-bullets { list-style: none; margin-bottom: 36px; }
-        .hero-bullets li { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; font-size: 1.05rem; }
-        .hero-bullets li::before { content: '✓'; display: flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--gradient); color: white; border-radius: 50%; font-size: 0.8rem; font-weight: 700; }
-        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-        .hero-microcopy { margin-top: 16px; font-size: 0.9rem; color: var(--text-light); display: flex; align-items: center; gap: 8px; }
-        .hero-visual { position: relative; }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-content>p {
+            font-size: clamp(1rem, 2.5vw, 1.15rem);
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-bullets {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .hero-bullets li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+        }
+
+        .hero-bullets li::before {
+            content: '✓';
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 22px;
+            height: 22px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .hero-microcopy {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .hero-visual {
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .hero-content {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s var(--ease-out-expo) 0.2s;
+        }
+
+        .hero-content.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Phone Mockup - with real screenshot support */
         .phone-mockup {
-            width: 100%; max-width: 320px; margin: 0 auto;
-            background: #1a1a2e; border-radius: 40px; padding: 12px;
-            box-shadow: var(--shadow-lg); animation: float 6s ease-in-out infinite;
+            width: 100%;
+            max-width: 280px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border-radius: 36px;
+            padding: 10px;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.85) rotateX(10deg);
+            opacity: 0;
+            transition: transform 1s var(--ease-out-expo), opacity 0.8s var(--ease-out-expo);
         }
-        .phone-screen { background: white; border-radius: 32px; overflow: hidden; aspect-ratio: 9/19; display: flex; flex-direction: column; }
-        .phone-header { background: var(--gradient); padding: 20px 16px; color: white; }
-        .phone-header h4 { font-size: 1rem; margin-bottom: 4px; }
-        .phone-header p { font-size: 0.75rem; opacity: 0.9; }
-        .phone-content { padding: 16px; flex: 1; }
-        .product-item { display: flex; gap: 12px; padding: 12px; background: var(--bg); border-radius: 12px; margin-bottom: 10px; }
-        .product-img { width: 50px; height: 50px; background: var(--gradient); border-radius: 10px; }
-        .product-info h5 { font-size: 0.85rem; margin-bottom: 2px; }
-        .product-info p { font-size: 0.75rem; color: var(--text-light); }
-        .product-price { margin-left: auto; font-weight: 700; color: var(--primary); font-size: 0.9rem; }
-        
+
+        .phone-mockup.hero-animate {
+            transform: scale(1) rotateX(0deg);
+            opacity: 1;
+        }
+
+        .phone-screen {
+            background: #000;
+            border-radius: 28px;
+            overflow: hidden;
+            aspect-ratio: 9/19.5;
+            position: relative;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .phone-screen .placeholder {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* App Download Section */
+        .app-download {
+            padding: 60px 0;
+            background: linear-gradient(135deg, #0B1726 0%, #1a2a4a 100%);
+            color: white;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .download-content h2 {
+            text-align: left;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .download-content p {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 24px;
+            font-size: 1.05rem;
+        }
+
+        .store-badges {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .store-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--text);
+            padding: 12px 20px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .store-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .store-badge svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .store-badge span {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .store-badge .small {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-light);
+        }
+
+        .download-phones {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .download-phones .phone-mockup {
+            max-width: 180px;
+            transform: none;
+            opacity: 1;
+        }
+
+        .download-phones .phone-mockup:nth-child(2) {
+            margin-top: 30px;
+        }
+
         /* Trust Strip */
-        .trust-strip { background: white; padding: 40px 0; border-bottom: 1px solid rgba(11, 132, 255, 0.1); }
-        .trust-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; }
-        .trust-item { display: flex; align-items: center; gap: 12px; color: var(--text-light); font-size: 0.95rem; }
-        .trust-icon { width: 44px; height: 44px; background: var(--bg); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; }
-        
+        .trust-strip {
+            background: white;
+            padding: 30px 0;
+            border-bottom: 1px solid rgba(11, 132, 255, 0.1);
+        }
+
+        .trust-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            padding: 8px 16px;
+            background: var(--bg);
+            border-radius: 50px;
+        }
+
+        .trust-icon {
+            font-size: 1.1rem;
+        }
+
         /* Features */
-        .features { padding: 100px 0; }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+        .features {
+            padding: 70px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
         .feature-card {
-            background: white; border-radius: var(--radius); padding: 32px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
             border: 1px solid rgba(11, 132, 255, 0.08);
-            transition: all 0.4s ease; cursor: default;
+            transition: all 0.3s var(--ease-out-expo);
         }
-        .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: var(--primary); }
-        .feature-icon { width: 60px; height: 60px; background: var(--gradient); border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
-        .feature-card h3 { font-size: 1.25rem; margin-bottom: 12px; font-weight: 700; }
-        .feature-card p { color: var(--text-light); font-size: 0.95rem; }
-        
-        /* How It Works */
-        .how-it-works { padding: 100px 0; background: linear-gradient(180deg, #EBF5FF 0%, #F7FBFF 100%); }
-        .steps-container { max-width: 900px; margin: 0 auto; }
-        .step { display: flex; gap: 32px; align-items: flex-start; margin-bottom: 48px; position: relative; }
-        .step:not(:last-child)::after {
-            content: ''; position: absolute; left: 35px; top: 80px; bottom: -40px;
-            width: 2px; background: linear-gradient(180deg, var(--primary), var(--secondary));
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
-        .step-number {
-            width: 72px; height: 72px; min-width: 72px; background: var(--gradient);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; color: white;
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* App Screenshots Section */
+        .app-screenshots {
+            padding: 70px 0;
+            background: linear-gradient(180deg, #EBF5FF 0%, #F7FBFF 100%);
+        }
+
+        .screenshots-grid {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-item {
+            text-align: center;
+        }
+
+        .screenshot-phone {
+            width: 160px;
+            background: #1a1a2e;
+            border-radius: 24px;
+            padding: 8px;
             box-shadow: var(--shadow);
         }
-        .step-content h3 { font-size: 1.4rem; margin-bottom: 12px; }
-        .step-content p { color: var(--text-light); font-size: 1.05rem; max-width: 500px; }
-        .step-visual { width: 200px; height: 120px; background: white; border-radius: var(--radius); margin-top: 16px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); overflow: hidden; }
-        .step-visual .qr-demo { width: 80px; height: 80px; background: repeating-linear-gradient(90deg, var(--text) 0, var(--text) 8px, white 8px, white 16px); background-size: 16px 16px; border-radius: 8px; }
-        .steps-cta { text-align: center; margin-top: 48px; }
-        
-        /* Screenshots */
-        .screenshots { padding: 100px 0; }
-        .screenshots-wrapper { position: relative; overflow: hidden; }
-        .screenshots-track { display: flex; gap: 24px; animation: scroll 30s linear infinite; }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        .screenshot-card { min-width: 280px; background: white; border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
-        .screenshot-img { width: 100%; height: 400px; background: var(--gradient); border-radius: var(--radius-sm); margin-bottom: 16px; display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; }
-        .screenshot-card h4 { font-size: 1rem; margin-bottom: 4px; }
-        .screenshot-card p { font-size: 0.85rem; color: var(--text-light); }
-        
+
+        .screenshot-phone .phone-inner {
+            background: #000;
+            border-radius: 18px;
+            overflow: hidden;
+            aspect-ratio: 9/19.5;
+        }
+
+        .screenshot-phone img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        .screenshot-phone .placeholder {
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.7rem;
+            padding: 10px;
+        }
+
+        .screenshot-item h4 {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: var(--text);
+        }
+
+        .screenshot-item p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 70px 0;
+        }
+
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 27px;
+            top: 60px;
+            bottom: -24px;
+            width: 2px;
+            background: var(--gradient);
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .step-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
         /* Benefits */
-        .benefits { padding: 100px 0; background: var(--text); color: white; }
-        .benefits h2, .benefits .section-subtitle { color: white; }
-        .benefits .section-subtitle { opacity: 0.8; }
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; }
-        .benefit-card { text-align: center; padding: 32px; }
-        .benefit-icon { font-size: 3rem; margin-bottom: 16px; }
-        .benefit-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
-        .benefit-card p { opacity: 0.8; font-size: 0.95rem; }
-        
+        .benefits {
+            padding: 70px 0;
+            background: var(--text);
+            color: white;
+        }
+
+        .benefits h2,
+        .benefits .section-subtitle {
+            color: white;
+        }
+
+        .benefits .section-subtitle {
+            opacity: 0.8;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 24px 16px;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 8px;
+        }
+
+        .benefit-card p {
+            opacity: 0.75;
+            font-size: 0.9rem;
+        }
+
         /* Pricing */
-        .pricing { padding: 100px 0; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; max-width: 1000px; margin: 0 auto; }
+        .pricing {
+            padding: 70px 0;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
         .pricing-card {
-            background: white; border-radius: var(--radius); padding: 40px 32px;
-            border: 2px solid transparent; transition: all 0.3s ease; position: relative;
+            background: white;
+            border-radius: var(--radius);
+            padding: 28px 24px;
+            border: 2px solid transparent;
+            position: relative;
         }
-        .pricing-card.featured { border-color: var(--primary); transform: scale(1.05); }
+
+        .pricing-card.featured {
+            border-color: var(--primary);
+        }
+
         .pricing-card.featured::before {
-            content: 'Popular'; position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
-            background: var(--gradient); color: white; padding: 4px 20px; border-radius: 20px;
-            font-size: 0.85rem; font-weight: 600;
+            content: 'Popular';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            color: white;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
         }
-        .pricing-card:hover { box-shadow: var(--shadow-lg); }
-        .pricing-card h3 { font-size: 1.4rem; margin-bottom: 8px; }
-        .pricing-card .price { font-size: 2rem; font-weight: 800; color: var(--primary); margin-bottom: 8px; }
-        .pricing-card .price-note { color: var(--text-light); font-size: 0.9rem; margin-bottom: 24px; }
-        .pricing-features { list-style: none; margin-bottom: 32px; }
-        .pricing-features li { padding: 10px 0; border-bottom: 1px solid var(--bg); display: flex; gap: 10px; align-items: center; }
-        .pricing-features li::before { content: '✓'; color: var(--primary); font-weight: 700; }
-        
+
+        .pricing-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .pricing-card .price-note {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            margin-bottom: 20px;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .pricing-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--bg);
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: 700;
+        }
+
         /* Testimonials */
-        .testimonials { padding: 100px 0; background: linear-gradient(180deg, #F7FBFF 0%, #EBF5FF 100%); }
-        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
-        .testimonial-card { background: white; border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); }
-        .testimonial-card p { font-size: 1.05rem; font-style: italic; margin-bottom: 24px; line-height: 1.7; }
-        .testimonial-author { display: flex; align-items: center; gap: 16px; }
-        .author-avatar { width: 56px; height: 56px; background: var(--gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.2rem; }
-        .author-info h4 { font-size: 1rem; margin-bottom: 2px; }
-        .author-info p { font-size: 0.85rem; color: var(--text-light); font-style: normal; margin: 0; }
-        
-        /* Contact Form */
-        .contact { padding: 100px 0; }
-        .contact-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1000px; margin: 0 auto; }
-        .contact-info h2 { text-align: left; margin-bottom: 24px; }
-        .contact-info p { color: var(--text-light); margin-bottom: 32px; font-size: 1.1rem; }
-        .contact-details { list-style: none; }
-        .contact-details li { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
-        .contact-details .icon { width: 48px; height: 48px; background: var(--gradient); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
-        .contact-form { background: white; border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow-lg); }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.95rem; }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%; padding: 14px 18px; border: 2px solid #E8F0FE; border-radius: var(--radius-sm);
-            font-size: 1rem; font-family: inherit; transition: all 0.3s;
+        .testimonials {
+            padding: 70px 0;
+            background: linear-gradient(180deg, #F7FBFF 0%, #EBF5FF 100%);
         }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px rgba(11, 132, 255, 0.1); }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-        .checkbox-group { display: flex; gap: 12px; align-items: flex-start; }
-        .checkbox-group input { width: auto; margin-top: 4px; }
-        .checkbox-group label { font-size: 0.9rem; color: var(--text-light); font-weight: 400; }
-        .privacy-note { font-size: 0.85rem; color: var(--text-light); margin-top: 16px; text-align: center; }
-        
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card>p {
+            font-size: 0.95rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .author-info p {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-style: normal;
+            margin: 0;
+        }
+
+        /* Contact */
+        .contact {
+            padding: 70px 0;
+        }
+
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            text-align: left;
+            margin-bottom: 16px;
+        }
+
+        .contact-info>p {
+            color: var(--text-light);
+            margin-bottom: 24px;
+        }
+
+        .contact-details {
+            list-style: none;
+        }
+
+        .contact-details li {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .contact-details .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            background: white;
+            border-radius: var(--radius);
+            padding: 28px;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #E8F0FE;
+            border-radius: var(--radius-sm);
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .checkbox-group label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+
+        .privacy-note {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-top: 12px;
+            text-align: center;
+        }
+
         /* FAQ */
-        .faq { padding: 100px 0; background: white; }
-        .faq-container { max-width: 800px; margin: 0 auto; }
-        .faq-item { border-bottom: 1px solid var(--bg); }
-        .faq-question { width: 100%; padding: 24px 0; display: flex; justify-content: space-between; align-items: center; background: none; border: none; cursor: pointer; text-align: left; font-size: 1.1rem; font-weight: 600; font-family: inherit; color: var(--text); }
-        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--primary); transition: transform 0.3s; }
-        .faq-item.active .faq-question::after { transform: rotate(45deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .faq-answer p { padding: 0 0 24px; color: var(--text-light); line-height: 1.7; }
-        .faq-item.active .faq-answer { max-height: 200px; }
-        
+        .faq {
+            padding: 70px 0;
+            background: white;
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--bg);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 18px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--text);
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 1.3rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s;
+        }
+
+        .faq-answer p {
+            padding: 0 0 18px;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+        }
+
         /* Footer */
-        footer { background: var(--text); color: white; padding: 60px 0 30px; }
-        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .footer-brand .logo { margin-bottom: 16px; display: inline-block; }
-        .footer-brand p { opacity: 0.7; font-size: 0.95rem; max-width: 280px; }
-        .footer-links h4 { font-size: 1rem; margin-bottom: 20px; opacity: 0.9; }
-        .footer-links ul { list-style: none; }
-        .footer-links li { margin-bottom: 12px; }
-        .footer-links a { color: white; opacity: 0.7; text-decoration: none; font-size: 0.95rem; transition: opacity 0.3s; }
-        .footer-links a:hover { opacity: 1; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer-bottom p { opacity: 0.6; font-size: 0.9rem; }
-        .social-links { display: flex; gap: 12px; }
-        .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; text-decoration: none; transition: background 0.3s; }
-        .social-links a:hover { background: var(--primary); }
-        
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 50px 0 24px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .footer-brand p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+            max-width: 250px;
+        }
+
+        .footer-links h4 {
+            font-size: 0.95rem;
+            margin-bottom: 16px;
+            opacity: 0.9;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: white;
+            opacity: 0.7;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .footer-bottom p {
+            opacity: 0.6;
+            font-size: 0.85rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
         /* Toast */
-        .toast { position: fixed; bottom: 24px; right: 24px; background: var(--text); color: white; padding: 16px 24px; border-radius: var(--radius-sm); box-shadow: var(--shadow-lg); transform: translateY(100px); opacity: 0; transition: all 0.3s ease; z-index: 9999; }
-        .toast.show { transform: translateY(0); opacity: 1; }
-        .toast.success { background: #10B981; }
-        .toast.error { background: #EF4444; }
-        
-        /* Responsive */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--text);
+            color: white;
+            padding: 14px 20px;
+            border-radius: var(--radius-sm);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 9999;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .toast.success {
+            background: #10B981;
+        }
+
+        /* ===== MOBILE RESPONSIVE ===== */
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; text-align: center; }
-            .hero-content p, .hero-bullets { margin-left: auto; margin-right: auto; }
-            .hero-buttons { justify-content: center; }
-            .phone-mockup { max-width: 280px; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr 1fr; }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 30px;
+            }
+
+            .hero-content p,
+            .hero-bullets {
+                margin-left: auto;
+                margin-right: auto;
+                max-width: 500px;
+            }
+
+            .hero-bullets li {
+                justify-content: center;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .phone-mockup {
+                max-width: 220px;
+            }
+
+            .download-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .download-content h2 {
+                text-align: center;
+            }
+
+            .store-badges {
+                justify-content: center;
+            }
+
+            .download-phones {
+                order: -1;
+                margin-bottom: 20px;
+            }
+
+            .download-phones .phone-mockup {
+                max-width: 140px;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
         }
+
         @media (max-width: 768px) {
-            .nav-links { position: fixed; top: 70px; left: 0; right: 0; background: white; flex-direction: column; padding: 24px; gap: 20px; transform: translateX(-100%); transition: transform 0.3s; box-shadow: var(--shadow); }
-            .nav-links.active { transform: translateX(0); }
-            .nav-toggle { display: flex; }
-            .step { flex-direction: column; align-items: center; text-align: center; }
-            .step:not(:last-child)::after { display: none; }
-            .form-row { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-brand p { margin: 0 auto; }
-            .footer-bottom { justify-content: center; }
-            .pricing-card.featured { transform: scale(1); }
+            .container {
+                padding: 0 16px;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                gap: 16px;
+                transform: translateX(-100%);
+                transition: transform 0.3s;
+                box-shadow: var(--shadow);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                padding: 80px 0 50px;
+                min-height: auto;
+            }
+
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero-content>p {
+                font-size: 0.95rem;
+                margin-bottom: 20px;
+            }
+
+            .hero-bullets {
+                margin-bottom: 20px;
+            }
+
+            .hero-bullets li {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+            }
+
+            .hero-buttons {
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .phone-mockup {
+                max-width: 180px;
+                border-radius: 28px;
+                padding: 8px;
+            }
+
+            .phone-screen {
+                border-radius: 22px;
+            }
+
+            .trust-strip {
+                padding: 20px 0;
+            }
+
+            .trust-grid {
+                gap: 10px;
+            }
+
+            .trust-item {
+                font-size: 0.75rem;
+                padding: 6px 12px;
+                gap: 6px;
+            }
+
+            .trust-icon {
+                font-size: 1rem;
+            }
+
+            .features,
+            .how-it-works,
+            .benefits,
+            .pricing,
+            .testimonials,
+            .contact,
+            .faq,
+            .app-screenshots,
+            .app-download {
+                padding: 50px 0;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+                margin-bottom: 8px;
+            }
+
+            .section-subtitle {
+                font-size: 0.9rem;
+                margin-bottom: 24px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            .feature-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+            }
+
+            .feature-card h3 {
+                font-size: 1rem;
+            }
+
+            .feature-card p {
+                font-size: 0.85rem;
+            }
+
+            .screenshots-grid {
+                gap: 16px;
+            }
+
+            .screenshot-phone {
+                width: 130px;
+                border-radius: 20px;
+                padding: 6px;
+            }
+
+            .screenshot-phone .phone-inner {
+                border-radius: 15px;
+            }
+
+            .screenshot-item h4 {
+                font-size: 0.8rem;
+                margin-top: 8px;
+            }
+
+            .screenshot-item p {
+                font-size: 0.7rem;
+            }
+
+            .step {
+                gap: 16px;
+                margin-bottom: 24px;
+            }
+
+            .step:not(:last-child)::after {
+                left: 23px;
+                top: 50px;
+            }
+
+            .step-number {
+                width: 48px;
+                height: 48px;
+                min-width: 48px;
+                font-size: 1.1rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.05rem;
+            }
+
+            .step-content p {
+                font-size: 0.9rem;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+
+            .benefit-card {
+                padding: 16px 12px;
+            }
+
+            .benefit-icon {
+                font-size: 2rem;
+                margin-bottom: 8px;
+            }
+
+            .benefit-card h3 {
+                font-size: 0.95rem;
+            }
+
+            .benefit-card p {
+                font-size: 0.8rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .pricing-card {
+                padding: 24px 20px;
+            }
+
+            .pricing-card.featured::before {
+                font-size: 0.7rem;
+                padding: 3px 12px;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+
+            .testimonial-card {
+                padding: 20px;
+            }
+
+            .testimonial-card>p {
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .faq-question {
+                font-size: 0.95rem;
+                padding: 14px 0;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 24px;
+            }
+
+            .footer-brand p {
+                margin: 0 auto;
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .app-download {
+                padding: 40px 0;
+            }
+
+            .download-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .download-content p {
+                font-size: 0.95rem;
+            }
+
+            .store-badges {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .store-badge {
+                width: 100%;
+                max-width: 200px;
+                justify-content: center;
+            }
+
+            .download-phones .phone-mockup {
+                max-width: 120px;
+            }
         }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 1.4rem;
+            }
+
+            .phone-mockup {
+                max-width: 160px;
+            }
+
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots-grid {
+                justify-content: space-around;
+            }
+
+            .screenshot-phone {
+                width: 110px;
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation: none !important; transition: none !important; }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+            .reveal,
+            .feature-card,
+            .step,
+            .benefit-card,
+            .pricing-card,
+            .testimonial-card,
+            .trust-item,
+            .hero-content,
+            .phone-mockup,
+            .section-title-group {
+                opacity: 1 !important;
+                transform: none !important;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header id="header">
@@ -303,14 +1506,11 @@
                 <a href="#" class="logo">InvenQR</a>
                 <ul class="nav-links" id="navLinks">
                     <li><a href="#features">Features</a></li>
-                    <li><a href="#how-it-works">How it works</a></li>
+                    <li><a href="#screenshots">Screenshots</a></li>
                     <li><a href="#pricing">Pricing</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#contact" class="btn btn-primary" style="padding: 10px 20px;">Book Demo</a></li>
+                    <li><a href="#download" class="btn btn-primary" style="padding: 8px 18px;">Download App</a></li>
                 </ul>
-                <div class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-                    <span></span><span></span><span></span>
-                </div>
+                <div class="nav-toggle" id="navToggle"><span></span><span></span><span></span></div>
             </nav>
         </div>
     </header>
@@ -320,43 +1520,28 @@
         <div class="container">
             <div class="hero-grid">
                 <div class="hero-content">
-                    <h1>Turn a QR into a shop — <span>manage inventory, invoices & orders</span> in minutes.</h1>
-                    <p>Create a unique QR, manage your stock, generate invoices with AI help, and let customers buy by scanning. Built for kirana, bakeries and local sellers.</p>
+                    <h1>Turn a QR into a shop — <span>manage inventory, invoices & orders</span> in minutes</h1>
+                    <p>Create a unique QR, manage your stock, generate invoices with AI help, and let customers buy by
+                        scanning.</p>
                     <ul class="hero-bullets">
                         <li><strong>Inventory</strong> → Add products, sizes, brands, prices</li>
-                        <li><strong>Billing</strong> → Smart invoice maker + barcode & scanner</li>
-                        <li><strong>QR storefront</strong> → Customers scan — place orders — you deliver</li>
+                        <li><strong>Billing</strong> → Smart invoice maker + barcode scanner</li>
+                        <li><strong>QR storefront</strong> → Customers scan & order directly</li>
                     </ul>
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">Book a Demo</a>
-                        <a href="#" class="btn btn-secondary">Try Demo Site</a>
+                        <a href="#download" class="btn btn-primary">Download App</a>
+                        <a href="#contact" class="btn btn-secondary">Book Demo</a>
                     </div>
-                    <p class="hero-microcopy">✨ Free 14-day trial — no credit card required.</p>
+                    <p class="hero-microcopy">✨ Free to try — no credit card required</p>
                 </div>
                 <div class="hero-visual">
-                    <div class="phone-mockup">
+                    <div class="phone-mockup" id="phoneMockup">
                         <div class="phone-screen">
-                            <div class="phone-header">
-                                <h4>🏪 Sharma Kirana Store</h4>
-                                <p>Scan & Order • Free Delivery</p>
-                            </div>
-                            <div class="phone-content">
-                                <div class="product-item">
-                                    <div class="product-img">🍚</div>
-                                    <div class="product-info"><h5>Basmati Rice</h5><p>1 kg pack</p></div>
-                                    <span class="product-price">₹85</span>
-                                </div>
-                                <div class="product-item">
-                                    <div class="product-img">🧈</div>
-                                    <div class="product-info"><h5>Amul Butter</h5><p>500g</p></div>
-                                    <span class="product-price">₹280</span>
-                                </div>
-                                <div class="product-item">
-                                    <div class="product-img">🥛</div>
-                                    <div class="product-info"><h5>Fresh Milk</h5><p>1 litre</p></div>
-                                    <span class="product-price">₹62</span>
-                                </div>
-                            </div>
+                            <!-- Replace this with your actual screenshot -->
+                            <img src="screenshot-hero.png" alt="InvenQR App Screenshot"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">📱 Add your<br>screenshot
+                                here<br>(screenshot-hero.png)</div>
                         </div>
                     </div>
                 </div>
@@ -368,10 +1553,53 @@
     <section class="trust-strip">
         <div class="container">
             <div class="trust-grid">
-                <div class="trust-item"><div class="trust-icon">📱</div><span>No buyer app required</span></div>
-                <div class="trust-item"><div class="trust-icon">✅</div><span>Works on any phone</span></div>
-                <div class="trust-item"><div class="trust-icon">🔒</div><span>Secure & HTTPS</span></div>
-                <div class="trust-item"><div class="trust-icon">🏪</div><span>Used by 500+ shops</span></div>
+                <div class="trust-item"><span class="trust-icon">📱</span><span>No buyer app needed</span></div>
+                <div class="trust-item"><span class="trust-icon">✅</span><span>Works on any phone</span></div>
+                <div class="trust-item"><span class="trust-icon">🔒</span><span>Secure & Safe</span></div>
+                <div class="trust-item"><span class="trust-icon">🏪</span><span>500+ shops</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Download Section -->
+    <section class="app-download" id="download">
+        <div class="container">
+            <div class="download-grid">
+                <div class="download-phones">
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="screenshot-1.png" alt="Inventory Screen"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">screenshot-1.png</div>
+                        </div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-screen">
+                            <img src="screenshot-2.png" alt="Invoice Screen"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">screenshot-2.png</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="download-content">
+                    <h2>Download the InvenQR App</h2>
+                    <p>Get started in minutes. Manage your shop inventory, create invoices, and let customers order via
+                        QR — all from your phone.</p>
+                    <div class="store-badges">
+                        <a href="https://play.google.com/store/apps/details?id=your.app.id" class="store-badge"
+                            target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                            </svg>
+                            <span><span class="small">GET IT ON</span>Google Play</span>
+                        </a>
+                        <a href="#contact" class="store-badge">
+                            <span>🌐</span>
+                            <span><span class="small">USE ON</span>Web Browser</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -379,38 +1607,96 @@
     <!-- Features -->
     <section class="features" id="features">
         <div class="container">
-            <h2>Everything you need to run your shop</h2>
-            <p class="section-subtitle">Simple tools that save you time and grow your business — no technical skills needed.</p>
+            <div class="section-title-group">
+                <h2>Everything you need to run your shop</h2>
+                <p class="section-subtitle">Simple tools that save you time — no technical skills needed</p>
+            </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">📦</div>
                     <h3>Inventory Manager</h3>
-                    <p>Add/edit products, categories, brands and stock. Fast search & bulk edit.</p>
+                    <p>Add products, categories, brands and stock. Fast search & bulk edit.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📷</div>
-                    <h3>Auto Barcode & Scanner</h3>
-                    <p>Generate barcodes automatically and scan with your phone for quick billing.</p>
+                    <h3>Barcode Scanner</h3>
+                    <p>Generate barcodes and scan with your phone for quick billing.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🧾</div>
                     <h3>Smart Invoice Maker</h3>
-                    <p>Create bills in seconds. Add products to invoice using AI-assisted search.</p>
+                    <p>Create bills in seconds with AI-assisted product search.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📲</div>
                     <h3>QR Storefront</h3>
-                    <p>Generate a unique QR for your shop — customers scan and buy directly.</p>
+                    <p>Unique QR for your shop — customers scan and buy directly.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🔔</div>
-                    <h3>Orders & Notifications</h3>
-                    <p>Orders appear in your shop dashboard — accept, prepare, and deliver.</p>
+                    <h3>Order Notifications</h3>
+                    <p>Orders appear in dashboard — accept, prepare, deliver.</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">☁️</div>
-                    <h3>Secure Cloud Sync</h3>
-                    <p>Data stored safely — access from any device. Set shop-level permissions.</p>
+                    <h3>Cloud Sync</h3>
+                    <p>Data stored safely — access from any device.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screenshots -->
+    <section class="app-screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-title-group">
+                <h2>See the app in action</h2>
+                <p class="section-subtitle">Beautiful screens designed for busy shop owners</p>
+            </div>
+            <div class="screenshots-grid">
+                <div class="screenshot-item">
+                    <div class="screenshot-phone">
+                        <div class="phone-inner">
+                            <img src="screenshot-inventory.png" alt="Inventory"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">Inventory<br>screenshot</div>
+                        </div>
+                    </div>
+                    <h4>Inventory</h4>
+                    <p>All products at a glance</p>
+                </div>
+                <div class="screenshot-item">
+                    <div class="screenshot-phone">
+                        <div class="phone-inner">
+                            <img src="screenshot-invoice.png" alt="Invoice"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">Invoice<br>screenshot</div>
+                        </div>
+                    </div>
+                    <h4>Invoice Maker</h4>
+                    <p>Create bills fast</p>
+                </div>
+                <div class="screenshot-item">
+                    <div class="screenshot-phone">
+                        <div class="phone-inner">
+                            <img src="screenshot-qr.png" alt="QR Storefront"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">QR Store<br>screenshot</div>
+                        </div>
+                    </div>
+                    <h4>QR Storefront</h4>
+                    <p>Customer's view</p>
+                </div>
+                <div class="screenshot-item">
+                    <div class="screenshot-phone">
+                        <div class="phone-inner">
+                            <img src="screenshot-orders.png" alt="Orders"
+                                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="placeholder" style="display:none;">Orders<br>screenshot</div>
+                        </div>
+                    </div>
+                    <h4>Orders</h4>
+                    <p>Manage all orders</p>
                 </div>
             </div>
         </div>
@@ -419,56 +1705,32 @@
     <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
         <div class="container">
-            <h2>Start in 3 simple steps</h2>
-            <p class="section-subtitle">Get your digital storefront running in under 10 minutes.</p>
+            <div class="section-title-group">
+                <h2>Start in 3 simple steps</h2>
+                <p class="section-subtitle">Get running in under 10 minutes</p>
+            </div>
             <div class="steps-container">
                 <div class="step">
                     <div class="step-number">1</div>
                     <div class="step-content">
                         <h3>Create your shop</h3>
-                        <p>Sign up with your phone number, enter your shop name and details. Your unique QR code is generated instantly!</p>
-                        <div class="step-visual"><div class="qr-demo"></div></div>
+                        <p>Sign up, enter shop details. Your unique QR is generated instantly!</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">2</div>
                     <div class="step-content">
                         <h3>Add products & prices</h3>
-                        <p>Quickly add your products with photos, prices, and sizes. Use voice input or barcode scanning for faster entry.</p>
-                        <div class="step-visual">📝 ➜ 📦</div>
+                        <p>Add products with photos, prices, sizes. Use voice or barcode for faster entry.</p>
                     </div>
                 </div>
                 <div class="step">
                     <div class="step-number">3</div>
                     <div class="step-content">
                         <h3>Customers scan & order</h3>
-                        <p>Print your QR or share it on WhatsApp. Customers scan with their phone camera — no app download needed — and place orders.</p>
-                        <div class="step-visual">📱 ➜ 🛒</div>
+                        <p>Print QR or share on WhatsApp. Customers scan and order — no app needed!</p>
                     </div>
                 </div>
-            </div>
-            <div class="steps-cta">
-                <a href="#" class="btn btn-primary">See Live Demo</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Screenshots Carousel -->
-    <section class="screenshots" id="screenshots">
-        <div class="container">
-            <h2>See the app in action</h2>
-            <p class="section-subtitle">Beautiful, intuitive screens designed for busy shop owners.</p>
-        </div>
-        <div class="screenshots-wrapper">
-            <div class="screenshots-track">
-                <div class="screenshot-card"><div class="screenshot-img">📦</div><h4>Inventory List</h4><p>Browse all products with thumbnails</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">✏️</div><h4>Product Editor</h4><p>Edit price, size, brand easily</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">🧾</div><h4>Invoice Creator</h4><p>AI-powered product suggestions</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">📲</div><h4>QR Storefront</h4><p>Your shop in customer's browser</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">📦</div><h4>Inventory List</h4><p>Browse all products with thumbnails</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">✏️</div><h4>Product Editor</h4><p>Edit price, size, brand easily</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">🧾</div><h4>Invoice Creator</h4><p>AI-powered product suggestions</p></div>
-                <div class="screenshot-card"><div class="screenshot-img">📲</div><h4>QR Storefront</h4><p>Your shop in customer's browser</p></div>
             </div>
         </div>
     </section>
@@ -476,13 +1738,31 @@
     <!-- Benefits -->
     <section class="benefits" id="benefits">
         <div class="container">
-            <h2>Why shop owners love InvenQR</h2>
-            <p class="section-subtitle">Join hundreds of local businesses saving time and growing sales.</p>
+            <div class="section-title-group">
+                <h2>Why shop owners love InvenQR</h2>
+                <p class="section-subtitle">Join hundreds saving time and growing sales</p>
+            </div>
             <div class="benefits-grid">
-                <div class="benefit-card"><div class="benefit-icon">⏱️</div><h3>Save 2+ hours daily</h3><p>Faster billing, instant inventory updates, no manual record-keeping.</p></div>
-                <div class="benefit-card"><div class="benefit-icon">📈</div><h3>Increase orders</h3><p>Customers order anytime via QR — even when shop is closed.</p></div>
-                <div class="benefit-card"><div class="benefit-icon">📊</div><h3>Track everything</h3><p>Real-time stock levels, sales reports, and order history.</p></div>
-                <div class="benefit-card"><div class="benefit-icon">💰</div><h3>Reduce losses</h3><p>Know what's selling, avoid overstock, spot discrepancies.</p></div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">⏱️</div>
+                    <h3>Save 2+ hours daily</h3>
+                    <p>Faster billing, instant updates</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📈</div>
+                    <h3>Increase orders</h3>
+                    <p>Orders anytime via QR</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <h3>Track everything</h3>
+                    <p>Real-time stock & reports</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>Reduce losses</h3>
+                    <p>Know what's selling</p>
+                </div>
             </div>
         </div>
     </section>
@@ -490,20 +1770,21 @@
     <!-- Pricing -->
     <section class="pricing" id="pricing">
         <div class="container">
-            <h2>Simple, transparent pricing</h2>
-            <p class="section-subtitle">Choose the plan that fits your business. Upgrade anytime.</p>
+            <div class="section-title-group">
+                <h2>Simple pricing</h2>
+                <p class="section-subtitle">Choose what fits your business</p>
+            </div>
             <div class="pricing-grid">
                 <div class="pricing-card">
                     <h3>Starter</h3>
                     <div class="price">₹999</div>
-                    <p class="price-note">One-time setup</p>
+                    <p class="price-note">One-time</p>
                     <ul class="pricing-features">
-                        <li>QR storefront setup</li>
-                        <li>Up to 100 products</li>
-                        <li>Basic invoice maker</li>
-                        <li>1 month free support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary" style="width:100%">Contact for Pricing</a>
+                        <li>QR storefront</li>
+                        <li>100 products</li>
+                        <li>Basic invoicing</li>
+                        <li>1 month support</li>
+                    </ul><a href="#contact" class="btn btn-secondary" style="width:100%">Get Started</a>
                 </div>
                 <div class="pricing-card featured">
                     <h3>Business</h3>
@@ -514,21 +1795,19 @@
                         <li>Unlimited products</li>
                         <li>AI invoice assistant</li>
                         <li>Barcode scanner</li>
-                        <li>6 months priority support</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width:100%">Contact for Pricing</a>
+                        <li>6 months support</li>
+                    </ul><a href="#contact" class="btn btn-primary" style="width:100%">Get Started</a>
                 </div>
                 <div class="pricing-card">
-                    <h3>Reseller / Agency</h3>
+                    <h3>Agency</h3>
                     <div class="price">Custom</div>
                     <p class="price-note">Contact us</p>
                     <ul class="pricing-features">
-                        <li>Bulk domain & site setup</li>
-                        <li>White-label option</li>
-                        <li>Priority onboarding</li>
-                        <li>Dedicated account manager</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-secondary" style="width:100%">Contact for Pricing</a>
+                        <li>Bulk setup</li>
+                        <li>White-label</li>
+                        <li>Priority support</li>
+                        <li>Account manager</li>
+                    </ul><a href="#contact" class="btn btn-secondary" style="width:100%">Contact</a>
                 </div>
             </div>
         </div>
@@ -537,64 +1816,80 @@
     <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
         <div class="container">
-            <h2>Trusted by local shop owners</h2>
-            <p class="section-subtitle">See what our customers say about InvenQR.</p>
+            <div class="section-title-group">
+                <h2>Trusted by shop owners</h2>
+            </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p>"My customers love ordering via QR. I get orders even after shop hours. Sales are up 30%!"</p>
+                    <p>"My customers love ordering via QR. Sales are up 30%!"</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">RS</div>
-                        <div class="author-info"><h4>Rajesh Sharma</h4><p>Sharma Kirana, Delhi</p></div>
+                        <div class="author-info">
+                            <h4>Rajesh Sharma</h4>
+                            <p>Sharma Kirana, Delhi</p>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p>"Billing used to take so long. Now I scan barcodes and invoices are ready in seconds."</p>
+                    <p>"Billing is so fast now. Invoices ready in seconds."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">PK</div>
-                        <div class="author-info"><h4>Priya Kumari</h4><p>Sweet Corner Bakery, Mumbai</p></div>
+                        <div class="author-info">
+                            <h4>Priya Kumari</h4>
+                            <p>Sweet Corner, Mumbai</p>
+                        </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
-                    <p>"Setup was so simple. I had my QR storefront running in 15 minutes. Highly recommend!"</p>
+                    <p>"Setup was simple. Running in 15 minutes!"</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">AV</div>
-                        <div class="author-info"><h4>Amit Verma</h4><p>Style Studio Salon, Bangalore</p></div>
+                        <div class="author-info">
+                            <h4>Amit Verma</h4>
+                            <p>Style Studio, Bangalore</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Form -->
+    <!-- Contact -->
     <section class="contact" id="contact">
         <div class="container">
             <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h2>Let's get you started</h2>
-                    <p>Book a free demo and see how InvenQR can transform your shop. Our team will guide you through setup and answer all questions.</p>
+                <div class="contact-info reveal">
+                    <h2>Get in touch</h2>
+                    <p>Book a demo and see how InvenQR can transform your shop.</p>
                     <ul class="contact-details">
-                        <li><div class="icon">📞</div><div><strong>Phone</strong><br>+91 98765 43210</div></li>
-                        <li><div class="icon">✉️</div><div><strong>Email</strong><br>hello@invenqr.in</div></li>
-                        <li><div class="icon">📍</div><div><strong>Location</strong><br>New Delhi, India</div></li>
+                        <li>
+                            <div class="icon">📞</div>
+                            <div><strong>Phone</strong><br>+91 98765 43210</div>
+                        </li>
+                        <li>
+                            <div class="icon">✉️</div>
+                            <div><strong>Email</strong><br>hello@invenqr.in</div>
+                        </li>
+                        <li>
+                            <div class="icon">📍</div>
+                            <div><strong>Location</strong><br>New Delhi, India</div>
+                        </li>
                     </ul>
                 </div>
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form reveal" id="contactForm">
                     <div class="form-row">
-                        <div class="form-group"><label for="name">Your Name *</label><input type="text" id="name" name="name" required></div>
-                        <div class="form-group"><label for="shopName">Shop Name *</label><input type="text" id="shopName" name="shopName" required></div>
+                        <div class="form-group"><label>Your Name *</label><input type="text" name="name" required></div>
+                        <div class="form-group"><label>Shop Name *</label><input type="text" name="shopName" required>
+                        </div>
                     </div>
                     <div class="form-row">
-                        <div class="form-group"><label for="phone">Phone Number *</label><input type="tel" id="phone" name="phone" required></div>
-                        <div class="form-group"><label for="email">Email Address</label><input type="email" id="email" name="email"></div>
+                        <div class="form-group"><label>Phone *</label><input type="tel" name="phone" required></div>
+                        <div class="form-group"><label>Email</label><input type="email" name="email"></div>
                     </div>
-                    <div class="form-group"><label for="city">Town / City</label><input type="text" id="city" name="city"></div>
-                    <div class="form-group"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your shop..."></textarea></div>
-                    <div class="form-group checkbox-group">
-                        <input type="checkbox" id="domainSetup" name="domainSetup">
-                        <label for="domainSetup">I want domain & website setup (additional service)</label>
-                    </div>
+                    <div class="form-group"><label>Message</label><textarea name="message"
+                            placeholder="Tell us about your shop..."></textarea></div>
                     <button type="submit" class="btn btn-primary" style="width:100%">Request Demo</button>
-                    <p class="privacy-note">🔒 We respect your privacy. We'll only use your info to contact you.</p>
+                    <p class="privacy-note">🔒 We'll only use your info to contact you</p>
                 </form>
             </div>
         </div>
@@ -603,15 +1898,30 @@
     <!-- FAQ -->
     <section class="faq" id="faq">
         <div class="container">
-            <h2>Frequently asked questions</h2>
-            <p class="section-subtitle">Everything you need to know about InvenQR.</p>
+            <div class="section-title-group">
+                <h2>FAQs</h2>
+            </div>
             <div class="faq-container">
-                <div class="faq-item"><button class="faq-question">Does customer need an app to buy?</button><div class="faq-answer"><p>No. Customers just scan the QR with their phone camera. It opens your storefront directly in their browser — no app download needed!</p></div></div>
-                <div class="faq-item"><button class="faq-question">Is my data safe?</button><div class="faq-answer"><p>Yes, your data is stored securely on encrypted cloud servers. Only you can access your shop data with your login credentials.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Can I generate barcodes for my products?</button><div class="faq-answer"><p>Yes! Our auto barcode generator creates unique barcodes for all your products. You can print stickers and scan them for quick billing.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Can I use the site offline?</button><div class="faq-answer"><p>The admin dashboard needs internet to sync data. Customers access your web storefront online. We're working on offline mode for future updates.</p></div></div>
-                <div class="faq-item"><button class="faq-question">How do I get paid?</button><div class="faq-answer"><p>We integrate with payment gateways like Razorpay. You can also accept cash on delivery. Configure your preferred payment methods in settings.</p></div></div>
-                <div class="faq-item"><button class="faq-question">Do you offer domain & deployment?</button><div class="faq-answer"><p>Yes! We can buy a custom domain and deploy your storefront for you. Contact us for domain setup pricing and options.</p></div></div>
+                <div class="faq-item"><button class="faq-question">Does customer need an app?</button>
+                    <div class="faq-answer">
+                        <p>No. Customers just scan the QR with their phone camera — opens in browser!</p>
+                    </div>
+                </div>
+                <div class="faq-item"><button class="faq-question">Is my data safe?</button>
+                    <div class="faq-answer">
+                        <p>Yes, stored securely on encrypted cloud servers.</p>
+                    </div>
+                </div>
+                <div class="faq-item"><button class="faq-question">Can I generate barcodes?</button>
+                    <div class="faq-answer">
+                        <p>Yes! Auto barcode generator included for all products.</p>
+                    </div>
+                </div>
+                <div class="faq-item"><button class="faq-question">How do I get paid?</button>
+                    <div class="faq-answer">
+                        <p>Integrate with Razorpay or accept cash on delivery.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -620,58 +1930,71 @@
     <footer>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#" class="logo">InvenQR</a>
-                    <p>QR storefronts, inventory & invoicing for small shops. Built in India, for local businesses.</p>
+                <div class="footer-brand"><a href="#" class="logo">InvenQR</a>
+                    <p>QR storefronts & invoicing for small shops. Built in India.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Product</h4>
-                    <ul><li><a href="#features">Features</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#how-it-works">How it works</a></li><li><a href="#faq">FAQ</a></li></ul>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#pricing">Pricing</a></li>
+                        <li><a href="#download">Download</a></li>
+                    </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Company</h4>
-                    <ul><li><a href="#">About Us</a></li><li><a href="#contact">Contact</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li></ul>
+                    <ul>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Legal</h4>
-                    <ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Refund Policy</a></li></ul>
+                    <ul>
+                        <li><a href="#">Privacy</a></li>
+                        <li><a href="#">Terms</a></li>
+                    </ul>
                 </div>
             </div>
             <div class="footer-bottom">
                 <p>© 2026 InvenQR — Built for small shops with ❤️</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Twitter">𝕏</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="LinkedIn">in</a>
-                    <a href="#" aria-label="YouTube">▶</a>
-                </div>
+                <div class="social-links"><a href="#">𝕏</a><a href="#">📷</a><a href="#">in</a></div>
             </div>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
 
     <script>
-        // Header scroll effect
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 50);
+        const phoneMockup = document.getElementById('phoneMockup');
+        const heroContent = document.querySelector('.hero-content');
+
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+
+        window.addEventListener('load', () => {
+            setTimeout(() => heroContent?.classList.add('show'), 100);
+            setTimeout(() => phoneMockup?.classList.add('hero-animate'), 300);
         });
 
-        // Mobile nav toggle
-        const navToggle = document.getElementById('navToggle');
-        const navLinks = document.getElementById('navLinks');
-        navToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => entry.target.classList.add('show'), delay * 80);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.section-title-group, .feature-card, .step, .benefit-card, .pricing-card, .testimonial-card, .trust-item, .reveal').forEach((el, i) => {
+            el.dataset.delay = i % 6;
+            observer.observe(el);
         });
 
-        // Close mobile nav on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => navLinks.classList.remove('active'));
-        });
+        document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('active'));
+        document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('active')));
 
-        // FAQ accordion
         document.querySelectorAll('.faq-question').forEach(btn => {
             btn.addEventListener('click', () => {
                 const item = btn.parentElement;
@@ -681,55 +2004,25 @@
             });
         });
 
-        // Toast notification
-        function showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = 'toast show ' + type;
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        }
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const formData = new FormData(this);
-            const data = Object.fromEntries(formData);
-            console.log('Form submitted:', data);
-            showToast('Thank you! We\'ll contact you within 24 hours.', 'success');
+            const toast = document.getElementById('toast');
+            toast.textContent = "Thank you! We'll contact you soon.";
+            toast.className = 'toast show success';
+            setTimeout(() => toast.classList.remove('show'), 4000);
             this.reset();
         });
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', function (e) {
                 const href = this.getAttribute('href');
                 if (href !== '#') {
                     e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Animate elements on scroll
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .step, .testimonial-card, .pricing-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
         });
     </script>
 </body>
+
 </html>
